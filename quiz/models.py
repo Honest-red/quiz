@@ -6,6 +6,9 @@ from django.db import models
 
 
 class Exam(BaseModel):
+    QUESTION_MIN_LIMIT = 3
+    QUESTION_MAX_LIMIT = 100
+
     class LEVEL(models.IntegerChoices):
         BASIC = 0, 'Basic'
         MIDDLE = 1, 'Middle'
@@ -18,6 +21,9 @@ class Exam(BaseModel):
 
     def __str__(self):
         return self.title
+
+    def questions_count(self):
+        return self.questions.count()
 
     class Meta:
         verbose_name = 'Exam'
@@ -67,3 +73,18 @@ class Result(BaseModel):
     class Meta:
         verbose_name = 'Result'
         verbose_name_plural = 'Results'
+
+    def update_result(self, order_number, question, selected_choices):
+        correct_choice = [choice.is_correct for choice in question.choices.all()]
+        correct_answer = True
+        for z in zip(selected_choices, correct_choice):
+            correct_answer &= (z[0] == z[1])  # correct_answer = correct_answer & (z[0] == z[1])
+
+        self.num_correct_answers += int(correct_answer)
+        self.num_incorrect_answers += 1 - int(correct_answer)
+        self.current_order_number = order_number
+
+        if order_number == question.exam.questions_count():
+            self.state = self.STATE.FINISHED
+
+        self.save()
