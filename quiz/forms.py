@@ -28,7 +28,6 @@ class QuestionInlineFormset(BaseInlineFormSet):
         if not (self.instance.QUESTION_MIN_LIMIT <= len(self.forms) <= self.instance.QUESTION_MAX_LIMIT):
             raise ValidationError(f'Num question mast start {self.instance.QUESTION_MIN_LIMIT} '
                                   f'and not be bigger {self.instance.QUESTION_MAX_LIMIT}')
-
         lst = []
         for form in self.forms:
             position = form.cleaned_data['order_num']
