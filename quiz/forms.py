@@ -29,6 +29,15 @@ class QuestionInlineFormset(BaseInlineFormSet):
             raise ValidationError(f'Num question mast start {self.instance.QUESTION_MIN_LIMIT} '
                                   f'and not be bigger {self.instance.QUESTION_MAX_LIMIT}')
 
+        lst = []
+        for form in self.forms:
+            position = form.cleaned_data['order_num']
+            if position <= len(self.forms) and position-1 in lst or position == 1 and position not in lst:
+                lst.append(position)
+            else:
+                raise ValidationError(f'- Number question mast start with 1 AND don\'t be bigger {len(self.forms)}'
+                                      f' AND step +1')
+
 
 class ChoiceForm(ModelForm):
     is_selected = forms.BooleanField(required=False)
