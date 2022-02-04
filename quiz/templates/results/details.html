@@ -31,8 +31,22 @@
                         </tr>
                         <tr>
                             <td>Результат</td>
-                            <td>{{ result.num_correct_answers }} / {{ result.num_incorrect_answers }}</td>
+                            <td>{{ result.num_correct_answers }} / {{ result.num_incorrect_answers }} </td>
                         </tr>
+                        <tr>
+                            <td>Success rate: </td>
+                            <td>{{ result.success_rate}}% </td>
+                        </tr>
+                        <tr>
+                            <td>Затраченное время: </td>
+                            <td>{{ result.time_test }}</td>
+                        </tr>
+                        <tr>
+                            <td>Баллы: </td>
+                            <td>{{ result.ball }}</td>
+                        </tr>
+
+
                     </tbody>
               </table>
             </div>
