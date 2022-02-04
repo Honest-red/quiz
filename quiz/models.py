@@ -90,7 +90,7 @@ class Result(BaseModel):
         self.save()
 
     def success_rate(self):
-        return round(self.num_correct_answers / self.num_incorrect_answers * 100)
+        return round(self.num_correct_answers / self.current_order_number * 100)
 
     def time_test(self):
         time = (self.update_timestamp - self.create_timestamp).seconds
