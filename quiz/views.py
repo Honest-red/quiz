@@ -1,16 +1,16 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.shortcuts import reverse
 from django.views.generic import CreateView
 from django.views.generic import DetailView
-from django.views.generic import UpdateView
 from django.views.generic import ListView
-from django.shortcuts import reverse
-from django.shortcuts import render
+from django.views.generic import UpdateView
 
+from .forms import ChoicesFormSet
 from .models import Exam
 from .models import Question
 from .models import Result
-from .forms import ChoicesFormSet
 
 
 class ExamListView(LoginRequiredMixin, ListView):
