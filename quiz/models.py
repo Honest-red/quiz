@@ -100,5 +100,5 @@ class Result(BaseModel):
         from account.apps import user_raiting_dispatcher
         ball = self.num_correct_answers - self.num_incorrect_answers
 
-        #user_raiting_dispatcher(ball, instance=self.user)
+        # user_raiting_dispatcher(ball, instance=self.user)
         return max(0, ball)

@@ -39,6 +39,7 @@ class ExamDetailView(LoginRequiredMixin, DetailView, MultipleObjectMixin):
         return Result.objects.filter(
             exam=self.get_object(),
             user=self.request.user
+
         ).order_by('state')
 
 
