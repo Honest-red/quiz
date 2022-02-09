@@ -22,10 +22,18 @@
     <div class="container">
         <form method="post" autocomplete="off">
             {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             {{ choices.management_form }}
             {% for form in choices %}
                 <div class="mt-1">
-                    {{ form.is_selected }} <label for="{{ form.is_selected.id_for_label }}">
+                    {{ form.is_selected }}
+                    <label for="{{ form.is_selected.id_for_label }}">
                         {{ form.text.value }}
                     </label>
                 </div>
