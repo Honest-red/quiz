@@ -24,8 +24,13 @@ def expression(value, *args):
 # '(45- 1) * 100 // 89'
 
 
+def rate(value, arg):
+    return round(value / arg * 100)
+
+
 register.filter('negative', negative_value)
 register.filter('multi', multi)
 register.filter('dived', dived)
+register.filter('rate', rate)
 
 register.simple_tag(func=expression, name='expression')

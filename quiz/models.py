@@ -101,3 +101,9 @@ class Result(BaseModel):
         ball = self.num_correct_answers - self.num_incorrect_answers
         #user_raiting.send(ball, instance=self.user)
         return max(0, ball)
+
+    def test_rate(self):
+        value = [el['num_correct_answers'] for el in Result.objects.values('num_correct_answers')]
+        return round(sum(value) / (len(value) * self.current_order_number) * 100)
+
+

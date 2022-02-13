@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+
+{% load custom_tags %}
+
 {% block title %}
     Результат теста
 {% endblock %}
@@ -30,11 +33,30 @@
                             <td>{{ result.user }}</td>
                         </tr>
                         <tr>
-                            <td>Результат</td>
-                            <td>{{ result.num_correct_answers }} / {{ result.num_incorrect_answers }} </td>
+                            <td>Результат
+                                <br>Результат в %
+                            </td>
+                            <td>{{ result.num_correct_answers }} / {{ result.num_incorrect_answers }}
+                                {% with result.num_correct_answers|rate:result.current_order_number as progress_level %}
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                         style="width:{{ progress_level }}%"
+                                         aria-valuenow="{{ progress_level }}"
+                                         aria-valuemin="0" aria-valuemax="100">{{ progress_level }}
+                                    </div>
+                                    {% with 100|negative|add:progress_level|negative as progress_level_no_correct %}
+                                        <div class="progress-bar bg-danger" role="progressbar"
+                                             style="width: {{ progress_level_no_correct }}%"
+                                             aria-valuenow="{{ progress_level_no_correct }}"
+                                             aria-valuemin="0" aria-valuemax="100">{{ progress_level_no_correct }}
+                                        </div>
+                                    {% endwith %}
+                                </div>
+                                {% endwith %}
+                            </td>
                         </tr>
                         <tr>
-                            <td>Success rate: </td>
+                            <td>Успешность попытки по тесту: </td>
                             <td>{{ result.success_rate}}% </td>
                         </tr>
                         <tr>
@@ -45,7 +67,11 @@
                             <td>Баллы: </td>
                             <td>{{ result.ball }}</td>
                         </tr>
-                    </tbody>
+                        <tr>
+                            <td>Процент правильных ответов по тесту: </td>
+                            <td>{{ result.test_rate }}%</td>
+                        </tr>
+                    </tbody>git
               </table>
             </div>
         </div>
