@@ -33,13 +33,13 @@
 - [x] Проект должен быть выложен на GitHub +
 - [x] Наличие файле requirements.txt +
 - [x] venv +
-- [] DB --> PostgreSQL
-  - миграция DB
+- [x] DB --> PostgreSQL
+- [x] миграция DB
 - [x] bootstrap5
 - API
-  - unit tests
-- кэширование + планировщик
-- Упаковка в Docker и запуск на AWS
+  - [x] unit tests
+- [x] кэширование + планировщик
+- [x] Упаковка в Docker и запуск на AWS
 ---
 # DB Struct
 ![db_struct](quiz.drawio.png)
